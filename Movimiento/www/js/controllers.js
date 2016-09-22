@@ -10,14 +10,23 @@ angular.module('starter.controllers', [])
   })
 })
 
-.controller('ChatsCtrl', function($scope, Chats, $state) {
+.controller('ChatsCtrl', function($scope, Chats, $state, $cordovaDeviceMotion) {
+
+   document.addEventListener("deviceready", function () {
+
+    $cordovaDeviceMotion.getCurrentAcceleration().then(function(result) {
+      var X = result.x;
+      var Y = result.y;
+      var Z = result.z;
+      var timeStamp = result.timestamp;
+      alert(X);
+    }, function(err) {
+      // An error occurred. Show a message to the user
+    });
+
+  }, false);
  
-  $("#enviar").on('click', function(){
-
-  alert ("llegue");
-             
-
-  });
+  
 
 })
 
