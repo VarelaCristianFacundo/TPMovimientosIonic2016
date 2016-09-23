@@ -19,10 +19,12 @@ angular.module('starter.controllers', [])
             $scope.Y = result.y;
             $scope.Z = result.z;
             $scope.timeStamp = result.timestamp;
+
             $scope.banderaIzquierda = 0;
             $scope.banderaDerecha = 0;
             $scope.banderaArriba = 0;
             $scope.banderaAbajo = 0;
+            $scope.banderaDadovuelta = 0;
 
 
 
@@ -68,33 +70,40 @@ angular.module('starter.controllers', [])
                 $scope.banderaIzquierda = 1;
                 $scope.banderaDerecha = 0;
                 $scope.Sonar('izquierda');
-                alert ("Izquierda");
+                for (var i = 0; i <= 100000000; i++) {
+            };  
             }
 
             if ($scope.X < -2 && $scope.banderaDerecha == 0)
             {
-                alert ("Derecha");
                 $scope.banderaIzquierda = 0;
                 $scope.banderaDerecha = 1; 
+                $scope.Sonar('derecha');
             }
 
             if ($scope.Y > 2 && $scope.banderaArriba == 0)
             {
                 $scope.banderaArriba = 1;
                 $scope.banderaAbajo = 0;
-                alert ("Abajo");
+                $scope.Sonar('parado');
             }
 
             if ($scope.Y < -2 && $scope.banderaAbajo == 0)
             {
                 $scope.banderaArriba = 0;
                 $scope.banderaAbajo = 1; 
-                alert ("Arriba");
+                $scope.Sonar('acostado');
             }
 
-            if ($scope.Z < -2)
+            if ($scope.Z < -2 && banderaDadovuelta == 0)
             {
-                alert ("Acostado");
+                banderaDadovuelta == 1;
+                $scope.Sonar('dadovuelta');
+            }
+
+            if ($scope.Z > 0 && banderaDadovuelta == 1)
+            {
+                banderaDadovuelta == 0;
             }
 
             });

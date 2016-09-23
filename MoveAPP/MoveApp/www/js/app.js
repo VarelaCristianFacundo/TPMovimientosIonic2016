@@ -21,7 +21,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova', 'starter
       StatusBar.styleDefault();
     }
   if (window.plugins && window.plugins.NativeAudio) {
-      window.plugins.NativeAudio.preloadSimple( 'la', 'audio/la.mp3', function(msg){
+      window.plugins.NativeAudio.preloadSimple( 'derecha', 'audio/derecha.mp3', function(msg){
     }, function(msg){
         console.log( 'error: ' + msg );
     });
@@ -29,14 +29,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova', 'starter
     }, function(msg){
         console.log( 'error: ' + msg );
     });
-      window.plugins.NativeAudio.preloadSimple( 're', 'audio/re.mp3', function(msg){
+      window.plugins.NativeAudio.preloadSimple( 'acostado', 'audio/acostado.mp3', function(msg){
     }, function(msg){
         console.log( 'error: ' + msg );
     });
-      window.plugins.NativeAudio.preloadSimple( 'resus', 'audio/resus.mp3', function(msg){
+      window.plugins.NativeAudio.preloadSimple( 'parado', 'audio/parado.mp3', function(msg){
     }, function(msg){
         console.log( 'error: ' + msg );
     });
+      window.plugins.NativeAudio.preloadSimple( 'dadovuelta', 'audio/dadovuelta.mp3', function(msg){
+    }, function(msg){
+        console.log( 'error: ' + msg );
+    });
+
 
     }
 
