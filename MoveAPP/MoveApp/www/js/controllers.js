@@ -10,7 +10,8 @@ angular.module('starter.controllers', [])
   })
 })
 
-.controller('ChatsCtrl', function($ionicPlatform, $scope, $timeout, $cordovaDeviceMotion) {
+.controller('ChatsCtrl', function($ionicPlatform, $scope, $timeout, $cordovaDeviceMotion, $cordovaNativeAudio) {
+
     $ionicPlatform.ready(function() {
         // Values @ this instance
         $cordovaDeviceMotion.getCurrentAcceleration().then(function(result) {
@@ -34,6 +35,16 @@ angular.module('starter.controllers', [])
         var options = {
             frequency: 2000
         };
+
+        $scope.Sonar = function(sonido)
+        {
+            try{
+              $cordovaNativeAudio.play(sonido);
+            }
+            catch (err){
+              console.log("error");
+            }
+        }
         $scope.watch = $cordovaDeviceMotion.watchAcceleration(options);
         $scope.watch.then(
             null,
@@ -56,6 +67,7 @@ angular.module('starter.controllers', [])
             {
                 $scope.banderaIzquierda = 1;
                 $scope.banderaDerecha = 0;
+                $scope.Sonar('izquierda');
                 alert ("Izquierda");
             }
 

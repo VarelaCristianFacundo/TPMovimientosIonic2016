@@ -20,6 +20,26 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova', 'starter
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+  if (window.plugins && window.plugins.NativeAudio) {
+      window.plugins.NativeAudio.preloadSimple( 'la', 'audio/la.mp3', function(msg){
+    }, function(msg){
+        console.log( 'error: ' + msg );
+    });
+      window.plugins.NativeAudio.preloadSimple( 'izquierda', 'audio/izquierda.mp3', function(msg){
+    }, function(msg){
+        console.log( 'error: ' + msg );
+    });
+      window.plugins.NativeAudio.preloadSimple( 're', 'audio/re.mp3', function(msg){
+    }, function(msg){
+        console.log( 'error: ' + msg );
+    });
+      window.plugins.NativeAudio.preloadSimple( 'resus', 'audio/resus.mp3', function(msg){
+    }, function(msg){
+        console.log( 'error: ' + msg );
+    });
+
+    }
+
   });
 })
 
