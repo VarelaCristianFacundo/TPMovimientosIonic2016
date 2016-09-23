@@ -10,46 +10,57 @@ angular.module('starter.controllers', [])
   })
 })
 
-.controller('ChatsCtrl', function ($scope, $cordovaDeviceMotion) {
-    var watchID;
-
-    document.addEventListener("deviceready", function () {
-  $cordovaPlugin.someFunction().then(success, error);
-}, false);
-
-    $cordovaDeviceMotion
-      .getCurrentAcceleration()
-      .then(function (motion) {
-        $scope.motion = motion;
-        console.log(motion);
-      }, function (err) {
-        $scope.msg = err.message;
-        console.log(err);
-      });
+.controller('ChatsCtrl', function($ionicPlatform, $scope, $timeout, $cordovaDeviceMotion) {
+    $ionicPlatform.ready(function() {
+        // Values @ this instance
+        $cordovaDeviceMotion.getCurrentAcceleration().then(function(result) {
+            $scope.X = result.x;
+            $scope.Y = result.y;
+            $scope.Z = result.z;
+            $scope.timeStamp = result.timestamp;
 
 
-    $scope.watchAcceleration = function () {
-      alert ("llegue");
-      var options = { frequency: 3000 };  // Update every 3 seconds
 
-      $scope.this_watch = $cordovaDeviceMotion.watchAcceleration(options);
 
-      $scope.this_watch.promise.then(
-        function () {  /* unused */
-        },
-        function (err) {
-          $scope.msg = err.message;
-        },
-        function (motion) {
-          $scope.motion = motion;
+        }, function(err) {
+            // An error occurred. Show a message to the user
+            console.log(err);
         });
-    };
-
-    $scope.clearWatch = function () {
-      // use watchID from watchAccelaration()
-      $cordovaDeviceMotion.clearWatch($scope.this_watch.watchId);
-    };
-  })
+        // Keep watching for change in values
+        // watch Acceleration
+        var options = {
+            frequency: 2000
+        };
+        $scope.watch = $cordovaDeviceMotion.watchAcceleration(options);
+        $scope.watch.then(
+            null,
+            function(error) {
+                // An error occurred
+            },
+            function(result) {
+                $scope.X = result.x;
+                $scope.Y = result.y;
+                $scope.Z = result.z;
+                $scope.timeStamp = result.timestamp;
+            if ($scope.X > 3)
+            {
+                alert ("Izquierda");
+            }
+            });
+    /*
+        $timeout(function() {
+            $scope.watch.clearWatch();
+            // or
+            // $cordovaDeviceMotion.clearWatch(watch)
+            // .then(function(result) {
+            //   // success
+            //   }, function (error) {
+            //   // error
+            // });
+        }, 10000);
+    */
+    });
+})
 
 .controller('login', function($scope, $state) {
 
