@@ -1,24 +1,70 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {})
+.controller('DashCtrl', function($scope, $timeout, $state) {
 
-.controller('ChatsCtrl', function($scope, Chats) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
+  $('#deslogin').on('click', function(){
 
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  };
+    alert ("¡Hasta luego!");
+    $state.go('login');
+
+  })
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
+.controller('ChatsCtrl', function ($scope, $cordovaDeviceMotion) {
+    var watchID;
+
+    $cordovaDeviceMotion
+      .getCurrentAcceleration()
+      .then(function (motion) {
+        $scope.motion = motion;
+        console.log(motion);
+      }, function (err) {
+        $scope.msg = err.message;
+        console.log(err);
+      });
+
+
+    $scope.watchAcceleration = function () {
+      var options = { frequency: 3000 };  // Update every 3 seconds
+
+      $scope.this_watch = $cordovaDeviceMotion.watchAcceleration(options);
+
+      $scope.this_watch.promise.then(
+        function () {  /* unused */
+        },
+        function (err) {
+          $scope.msg = err.message;
+        },
+        function (motion) {
+          $scope.motion = motion;
+        });
+    };
+
+    $scope.clearWatch = function () {
+      // use watchID from watchAccelaration()
+      $cordovaDeviceMotion.clearWatch($scope.this_watch.watchId);
+    };
+  })
+
+.controller('login', function($scope, $state) {
+
+  $('#login').on('click', function(){
+    var username = "";
+    username = $("#nombre").val();
+    var flag = 0;
+  //alert ("Bienvenido "+username);
+       
+        if (username == "Cristian")
+        {
+            alert ("Bienvenido " + username);
+            $state.go('tab.chats');
+        }
+        else
+        {
+            alert ("Usted no es usuario");
+        }
+
+  })
 })
 
 .controller('AccountCtrl', function($scope) {
@@ -26,3 +72,6 @@ angular.module('starter.controllers', [])
     enableFriends: true
   };
 });
+
+
+ 
