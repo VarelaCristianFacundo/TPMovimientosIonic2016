@@ -13,6 +13,10 @@ angular.module('starter.controllers', [])
 .controller('ChatsCtrl', function ($scope, $cordovaDeviceMotion) {
     var watchID;
 
+    document.addEventListener("deviceready", function () {
+  $cordovaPlugin.someFunction().then(success, error);
+}, false);
+
     $cordovaDeviceMotion
       .getCurrentAcceleration()
       .then(function (motion) {
@@ -25,6 +29,7 @@ angular.module('starter.controllers', [])
 
 
     $scope.watchAcceleration = function () {
+      alert ("llegue");
       var options = { frequency: 3000 };  // Update every 3 seconds
 
       $scope.this_watch = $cordovaDeviceMotion.watchAcceleration(options);
