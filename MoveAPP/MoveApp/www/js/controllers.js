@@ -12,6 +12,14 @@ angular.module('starter.controllers', [])
 
 .controller('ChatsCtrl', function($ionicPlatform, $scope, $timeout, $cordovaDeviceMotion, $cordovaNativeAudio) {
 
+
+
+                $scope.banderaIzquierda = 0;
+                $scope.banderaDerecha = 0;
+                $scope.banderaArriba = 0;
+                $scope.banderaAbajo = 0;
+                $scope.banderaDadovuelta = 0;
+
     $ionicPlatform.ready(function() {
         // Values @ this instance
         $cordovaDeviceMotion.getCurrentAcceleration().then(function(result) {
@@ -19,12 +27,8 @@ angular.module('starter.controllers', [])
             $scope.Y = result.y;
             $scope.Z = result.z;
             $scope.timeStamp = result.timestamp;
-
-            $scope.banderaIzquierda = 0;
-            $scope.banderaDerecha = 0;
-            $scope.banderaArriba = 0;
-            $scope.banderaAbajo = 0;
-            $scope.banderaDadovuelta = 0;
+  
+                
 
 
 
@@ -38,15 +42,7 @@ angular.module('starter.controllers', [])
             frequency: 2000
         };
 
-        $scope.Sonar = function(sonido)
-        {
-            try{
-              $cordovaNativeAudio.play(sonido);
-            }
-            catch (err){
-              console.log("error");
-            }
-        }
+        
         $scope.watch = $cordovaDeviceMotion.watchAcceleration(options);
         $scope.watch.then(
             null,
@@ -69,9 +65,7 @@ angular.module('starter.controllers', [])
             {
                 $scope.banderaIzquierda = 1;
                 $scope.banderaDerecha = 0;
-                $scope.Sonar('izquierda');
-                for (var i = 0; i <= 100000000; i++) {
-            };  
+                $scope.Sonar('izquierda');                
             }
 
             if ($scope.X < -2 && $scope.banderaDerecha == 0)
@@ -101,12 +95,22 @@ angular.module('starter.controllers', [])
                 $scope.Sonar('dadovuelta');
             }
 
-            if ($scope.Z > 0 && banderaDadovuelta == 1)
+            if ($scope.Z > 0 && banderaDadovuelta == 0)
             {
-                banderaDadovuelta == 0;
+                banderaDadovuelta == 1;
             }
 
             });
+
+            $scope.Sonar = function(sonido)
+            {
+                try{
+                  $cordovaNativeAudio.play(sonido);
+                }
+                catch (err){
+                  console.log("error");
+                }
+            }
     /*
         $timeout(function() {
             $scope.watch.clearWatch();
