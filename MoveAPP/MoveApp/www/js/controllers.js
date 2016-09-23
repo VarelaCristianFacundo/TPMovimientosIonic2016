@@ -18,8 +18,10 @@ angular.module('starter.controllers', [])
             $scope.Y = result.y;
             $scope.Z = result.z;
             $scope.timeStamp = result.timestamp;
-            $scope.banderaX = 0;
-            $scope.banderaY = 0; 
+            $scope.banderaIzquierda = 0;
+            $scope.banderaDerecha = 0;
+            $scope.banderaArriba = 0;
+            $scope.banderaAbajo = 0;
 
 
 
@@ -50,31 +52,35 @@ angular.module('starter.controllers', [])
 //Y < 0 Arriba
 //Z < 0 Boca abajo
 
-            if ($scope.X > 0 && $scope.banderaX == 0)
+            if ($scope.X > 2 && $scope.banderaIzquierda == 0)
             {
-                $scope.banderaX = 1;
-                $scope.banderaY = 0;
+                $scope.banderaIzquierda = 1;
+                $scope.banderaDerecha = 0;
                 alert ("Izquierda");
             }
 
-            if ($scope.X < -0 && $scope.banderaY == 0)
+            if ($scope.X < -2 && $scope.banderaDerecha == 0)
             {
                 alert ("Derecha");
-                $scope.banderaX = 0;
-                $scope.banderaY = 1; 
+                $scope.banderaIzquierda = 0;
+                $scope.banderaDerecha = 1; 
             }
 
-            if ($scope.Y > 9)
+            if ($scope.Y > 2 && $scope.banderaArriba == 0)
             {
+                $scope.banderaArriba = 1;
+                $scope.banderaAbajo = 0;
                 alert ("Abajo");
             }
 
-            if ($scope.Y < -9)
+            if ($scope.Y < -2 && $scope.banderaAbajo == 0)
             {
+                $scope.banderaArriba = 0;
+                $scope.banderaAbajo = 1; 
                 alert ("Arriba");
             }
 
-            if ($scope.Z < -9)
+            if ($scope.Z < -2)
             {
                 alert ("Acostado");
             }
