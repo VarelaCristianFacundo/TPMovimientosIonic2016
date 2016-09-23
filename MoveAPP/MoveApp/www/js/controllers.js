@@ -42,10 +42,37 @@ angular.module('starter.controllers', [])
                 $scope.Y = result.y;
                 $scope.Z = result.z;
                 $scope.timeStamp = result.timestamp;
-            if ($scope.X > 3)
+
+//X > 0 Izquierda
+//X < 0 Derecha
+//Y > 0 Abajo
+//Y < 0 Arriba
+//Z < 0 Boca abajo
+            if ($scope.X > 9)
             {
                 alert ("Izquierda");
             }
+
+            if ($scope.X < -9)
+            {
+                alert ("Derecha");
+            }
+
+            if ($scope.Y > 9)
+            {
+                alert ("Abajo");
+            }
+
+            if ($scope.Y < -9)
+            {
+                alert ("Arriba");
+            }
+
+            if ($scope.Z < -9)
+            {
+                alert ("Acostado");
+            }
+
             });
     /*
         $timeout(function() {
