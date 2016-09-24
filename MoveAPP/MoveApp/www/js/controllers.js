@@ -89,15 +89,9 @@ angular.module('starter.controllers', [])
                 $scope.Sonar('acostado');
             }
 
-            if ($scope.Z < -2 && banderaDadovuelta == 0)
+            if ($scope.Z < -2)
             {
-                banderaDadovuelta == 1;
                 $scope.Sonar('dadovuelta');
-            }
-
-            if ($scope.Z > 0 && banderaDadovuelta == 0)
-            {
-                banderaDadovuelta == 1;
             }
 
             });
